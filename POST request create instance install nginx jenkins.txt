@@ -1,0 +1,51 @@
+curl -X POST \
+  'https://www.googleapis.com/compute/v1/projects/sharp-theory-241513/zones/europe-west3-a/instances?Authorization=Bearer%20ya29.GlsZByhSIMNMOM3_5iEspXjI65mksttJD3L7P7vmqO9bgTQqErlHK7pi_vCeNw930nhi_X2d0wGf5o-yDYFlxh2wqicte9ug7cUbljY_pGwTKArsncDoZEzO5kt1' \
+  -H 'Accept: */*' \
+  -H 'Authorization: Bearer ya29.GlsZByhSIMNMOM3_5iEspXjI65mksttJD3L7P7vmqO9bgTQqErlHK7pi_vCeNw930nhi_X2d0wGf5o-yDYFlxh2wqicte9ug7cUbljY_pGwTKArsncDoZEzO5kt1' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-type: application/json' \
+  -H 'Host: www.googleapis.com' \
+  -H 'Postman-Token: 56813dcf-90fa-4c97-90b8-2bc05158b556,dc4577b2-a71a-4b45-9a4b-1419fe229eb3' \
+  -H 'User-Agent: PostmanRuntime/7.13.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 1138' \
+  -d '{
+    "machineType": "zones/europe-west3-a/machineTypes/g1-small",
+    "name": "my-template-instance",
+    "networkInterfaces": [
+        {
+            "accessConfigs": [
+                {
+                    "type": "ONE_TO_ONE_NAT",
+                    "name": "External NAT"
+                }
+            ]
+        }
+    ],
+    "disks": [
+        {
+            "autoDelete": true,
+            "boot": true,
+            "type": "",
+            "initializeParams": {
+                "sourceImage": "projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20190514"
+            }
+        }
+    ],
+    "metadata": {
+    "kind": "compute#metadata",
+    "items": [
+      {
+        "key": "startup-script",
+        "value": "sudo apt-get -y update\nsudo apt-get -y install nginx\nsudo apt-get -y install openjdk-8-jdk\nwget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -\nsudo sh -c '\''echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'\''\nsudo apt-get -y update\nsudo apt-get -y install jenkins"
+      }
+    ]
+  },
+  "tags": {
+    "items": [
+      "http-server"
+    ]
+  }
+}'
